@@ -1,24 +1,4 @@
 
-# coding: utf-8
-
-# In[ ]:
-
-from __future__ import absolute_import
-
-
-
-# In[4]:
-
-get_ipython().system(' sudo apt-get install openjdk-8-jre -y')
-
-
-# In[7]:
-
-get_ipython().system(' pip install h2o')
-
-
-# In[8]:
-
 import os
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
@@ -28,9 +8,6 @@ import pandas as pd
 from tabulate import tabulate
 # initialize the model scoring server
 h2o.init()
-
-
-# In[9]:
 
 # function to get files from s3
 def pull_file_from_s3(key):
@@ -50,9 +27,6 @@ def pull_file_from_s3(key):
     
 # download the model from s3
 downloaded_model = pull_file_from_s3('/home/jupyter/Predict-Churn/GBM_RF_ensemble_')  
-
-
-# In[11]:
 
 def churn_predict(State,AccountLength,AreaCode,Phone,IntlPlan,VMailPlan,VMailMessage,DayMins,DayCalls,DayCharge,EveMins,EveCalls,EveCharge,NightMins,NightCalls,NightCharge,IntlMins,IntlCalls,IntlCharge,CustServCalls):
     # connect to the model scoring service
@@ -87,31 +61,3 @@ def churn_predict(State,AccountLength,AreaCode,Phone,IntlPlan,VMailPlan,VMailMes
     predictions = ChurnPredictor.predict(h2o.H2OFrame(newData))
     predictionsOut = h2o.as_list(predictions, use_pandas=False)
     return predictionsOut
-
-
-# In[12]:
-
-State = "KS"
-AccountLength = 1 
-AreaCode = 213
-Phone = "362-1234"
-IntlPlan = "no"
-VMailPlan = "no"
-VMailMessage = 0
-DayMins = 0
-DayCalls = 2
-DayCharge = 20
-EveMins = 120
-EveCalls = 97
-EveCharge = 7
-NightMins = 2
-NightCalls = 7
-NightCharge = 10
-IntlMins = 13
-IntlCalls = 0
-IntlCharge = 3.67
-CustServCalls = 2
-    
-
-churn_predict(State,AccountLength,AreaCode,Phone,IntlPlan,VMailPlan,VMailMessage,DayMins,DayCalls,DayCharge,EveMins,EveCalls,EveCharge,NightMins,NightCalls,NightCharge,IntlMins,IntlCalls,IntlCharge,CustServCalls)
-
