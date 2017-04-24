@@ -6,10 +6,6 @@
 from __future__ import absolute_import
 
 
-# In[5]:
-
-get_ipython().system(' sudo apt-get update')
-
 
 # In[4]:
 
