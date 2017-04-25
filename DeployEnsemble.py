@@ -11,8 +11,8 @@ h2o.init()
 # function to get files from s3
 def pull_file_from_s3(key):
     def get_bucket():            
-        access= os.environ['SECRET_ENV_AWS_ACCESS_KEY_BRETT'] 
-        secret= os.environ['SECRET_ENV_AWS_SECRET_KEY_BRETT']
+        access='AKIAJXTIXBAJVFOPYSLQ' 
+        secret='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'
         customer = 'demonstration'
         conn = S3Connection(access,secret)
         b = conn.get_bucket('dsclouddata',validate=False)
