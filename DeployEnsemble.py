@@ -25,7 +25,7 @@ def pull_file_from_s3(key):
 
     
 # download the model from s3
-downloaded_model = pull_file_from_s3('GBM_model_python_1490900215806_1')  
+downloaded_model = pull_file_from_s3('gbm_grid_binomial_model_1')  
 
 def churn_predict(State,AccountLength,AreaCode,Phone,IntlPlan,VMailPlan,VMailMessage,DayMins,DayCalls,DayCharge,EveMins,EveCalls,EveCharge,NightMins,NightCalls,NightCharge,IntlMins,IntlCalls,IntlCharge,CustServCalls):
     # connect to the model scoring service
