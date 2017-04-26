@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 from tabulate import tabulate
 # initialize the model scoring server
-h2o.init(strict_version_check = FALSE)
+h2o.init(strict_version_check = False)
 
 # function to get files from s3
 def pull_file_from_s3(key):
@@ -29,7 +29,7 @@ downloaded_model = pull_file_from_s3('GBM_model_python_1490723603840_1')
 
 def churn_predict(State,AccountLength,AreaCode,Phone,IntlPlan,VMailPlan,VMailMessage,DayMins,DayCalls,DayCharge,EveMins,EveCalls,EveCharge,NightMins,NightCalls,NightCharge,IntlMins,IntlCalls,IntlCharge,CustServCalls):
     # connect to the model scoring service
-    h2o.init(strict_version_check = FALSE)
+    h2o.init(strict_version_check = False)
 
     # open the downloaded model
     ChurnPredictor = h2o.load_model(path=downloaded_model)  
