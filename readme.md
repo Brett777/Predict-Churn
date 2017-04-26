@@ -1,4 +1,4 @@
-![](https://s4.postimg.org/6jxltgbu5/churnbanner.jpg)
+﻿![](https://s4.postimg.org/6jxltgbu5/churnbanner.jpg)
 
 To determine the percentage of customers that have churned, take all the
 customers you lose during a time frame, such as a month, and divide it by the
@@ -16,9 +16,9 @@ Customers beginning of month
 If your organization prefers, you can use that same method on a different time
 frame such as quarterly or annually.
 
- 
-
- 
+<HTML>
+<a href="https://app.powerbi.com/view?r=eyJrIjoiMDBhODI5OWYtOTJiZi00MDYyLWI4ZjAtNjU2ZTQ0ZGRhMmE1IiwidCI6ImYyMDdmZGRmLWM3NmUtNDlmZC1iMmQ5LTFiOGJkMTRkMDgzMiIsImMiOjF9" target="_blank"\>Dashboard</a\>
+</HTML>
 
 ![](https://s22.postimg.org/qoh33p3j5/Next_Month_Churn.jpg)
 
