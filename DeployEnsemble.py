@@ -60,5 +60,7 @@ def churn_predict(State,AccountLength,AreaCode,Phone,IntlPlan,VMailPlan,VMailMes
     # evaluate the feature vector using the model
     predictions = ChurnPredictor.predict(h2o.H2OFrame(newData))
     predictionsOut = h2o.as_list(predictions, use_pandas=False)
-    x = tabulate(predictionsOut, tablefmt="pipe") 
-    print x
+    prediction = predictionsOut[1][0]
+    probabilityChurn = predictionsOut[1][1]
+    probabilityRetain = predictionsOut[1][2]
+    return "Prediction: " + str(prediction) + " |Probability to Churn: " + str(probabilityChurn) + " |Probability to Retain: " + str(probabilityRetain)
