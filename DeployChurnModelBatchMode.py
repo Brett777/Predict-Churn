@@ -7,7 +7,7 @@ import pandas as pd
 from tabulate import tabulate
 
 # initialize the model scoring server
-h2o.init(nthreads=2,max_mem_size=2, start_h2o=True)
+h2o.init(nthreads=2,max_mem_size=1, start_h2o=True)
 
 # function to upload files to s3
 def upload_file_to_s3(myFile):
