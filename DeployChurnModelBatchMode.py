@@ -12,8 +12,8 @@ h2o.init(nthreads=1,max_mem_size=1, start_h2o=True, strict_version_check = False
 # function to upload files to s3
 def upload_file_to_s3(myFile):
     def get_bucket():
-        access= 'AKIAJXTIXBAJVFOPYSLQ'
-        secret= '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'
+        access= os.environ['SECRET_ENV_AWS_ACCESS_KEY_BRETT'] 
+        secret= os.environ['SECRET_ENV_AWS_SECRET_KEY_BRETT']
         customer = 'demonstration'
         conn = S3Connection(access,secret)
         b = conn.get_bucket('dsclouddata',validate=False)
