@@ -4,4 +4,5 @@
 # In[ ]:
 
 print("Now downloading updates...")
+print("Updates complete!")
 
