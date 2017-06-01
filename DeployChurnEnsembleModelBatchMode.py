@@ -26,26 +26,6 @@ def upload_file_to_s3(myFile):
     successMessage = "Uploaded %s to S3."%(myFile)    
     return successMessage 
 
-# function to get files from s3
-def pull_file_from_s3(key):
-    def get_bucket():            
-        access= 'AKIAJXTIXBAJVFOPYSLQ'
-        secret= '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'
-        customer = 'demonstration'
-        conn = S3Connection(access,secret)
-        b = conn.get_bucket('dsclouddata',validate=False)
-        return b
-
-    s3_bucket = get_bucket()
-    payload = s3_bucket.get_key(key)
-    local_file = payload.get_contents_to_filename(key)
-    return key
-
-    
-# download the model from s3
-downloaded_model = pull_file_from_s3('gbm_grid_binomial_model_1')  
-
-
 def churn_predict_batch(batchFile):
     # connect to the model scoring service
     h2o.connect(verbose=False)
@@ -54,7 +34,7 @@ def churn_predict_batch(batchFile):
     newData = h2o.import_file(batchFile)
 
     # open the downloaded model
-    ChurnPredictor = h2o.load_model(path=downloaded_model)  
+    ChurnPredictor = h2o.load_model(path='GBM-RF-ensemble')  
     
     # evaluate the feature vector using the model
     predictions = ChurnPredictor.predict(newData)
