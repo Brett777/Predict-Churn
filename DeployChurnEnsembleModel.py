@@ -13,7 +13,7 @@ def churn_predict(State,AccountLength,AreaCode,Phone,IntlPlan,VMailPlan,VMailMes
     h2o.connect()
 
     # open the downloaded model
-    ChurnPredictor = h2o.load_model(path='/home/jupyter/Predict-Churn/GBM-RF-ensemble') 
+    ChurnPredictor = h2o.load_model(path='GBM-RF-ensemble') 
 
     # define a feature vector to evaluate with the model
     newData = pd.DataFrame({'State' : State,
