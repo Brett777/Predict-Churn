@@ -9,8 +9,6 @@ from tabulate import tabulate
 h2o.init(nthreads=1,max_mem_size=1, start_h2o=True, strict_version_check = False)
 
 
-change
-
 # function to get files from s3
 def pull_file_from_s3(key):
     def get_bucket():            
