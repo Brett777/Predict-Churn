@@ -1,5 +1,6 @@
 # https://shiring.github.io/machine_learning/2017/05/01/fraud
 
+install.packages('h2o')
 
 library(tidyverse)
 # download from https://www.kaggle.com/dalpozz/creditcardfraud
@@ -93,7 +94,7 @@ model_nn <- h2o.deeplearning(x = features,
                              ignore_const_cols = FALSE,
                              seed = 42,
                              hidden = c(10, 2, 10), 
-                             epochs = 100,
+                             epochs = 10,
                              activation = "Tanh")
 
 
