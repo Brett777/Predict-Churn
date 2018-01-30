@@ -113,9 +113,11 @@ ggplot(train_features, aes(x = DF.L2.C1, y = DF.L2.C2, color = Class)) +
   geom_point(alpha = 0.1)
 
 
-
 #
-# let's take the third hidden layer
+# We could use the reduced dimensionality representation of one of the hidden layers 
+# as features for model training. An example would be to use the 10 features from the 
+# first or third layer:
+
 
 train_features <- h2o.deepfeatures(model_nn, train_unsupervised, layer = 3) %>%
   as.data.frame() %>%
