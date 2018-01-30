@@ -6,58 +6,37 @@ library(tidyverse)
 creditcard <- read.csv("https://s3-us-west-1.amazonaws.com/dsclouddata/creditcard.csv")
 
 
-
+# Show highly unbalanced dataset
 creditcard %>%
   ggplot(aes(x = Class)) +
   geom_bar(color = "grey", fill = "lightgrey") +
   theme_bw()
 
 
-
-summary(creditcard$Time)
-
-
-
-# how many seconds are 24 hours
-# 1 hr = 60 mins = 60 x 60 s = 3600 s
-3600 * 24
-
-
-
+#
 # separate transactions by day
 creditcard$day <- ifelse(creditcard$Time > 3600 * 24, "day2", "day1")
 # make transaction relative to day
 creditcard$Time_day <- ifelse(creditcard$day == "day2", creditcard$Time - 86400, creditcard$Time)
 summary(creditcard[creditcard$day == "day1", ]$Time_day)
-
-
-
 summary(creditcard[creditcard$day == "day2", ]$Time_day)
 
 
-
 # bin transactions according to time of day
+# plot the count non-fraud and fraud by part of day
 creditcard$Time <- as.factor(ifelse(creditcard$Time_day <= 38138, "gr1", # mean 1st Qu.
                                     ifelse(creditcard$Time_day <= 52327, "gr2", # mean mean
                                            ifelse(creditcard$Time_day <= 69580, "gr3", # mean 3rd Qu
                                                   "gr4"))))
-
-
-
 creditcard %>%
   ggplot(aes(x = day)) +
   geom_bar(color = "grey", fill = "lightgrey") +
   theme_bw()
-
-
-
 creditcard <- select(creditcard, -Time_day, -day)
-
 # convert class variable to factor
 creditcard$Class <- factor(creditcard$Class)
 
-
-
+#plot
 creditcard %>%
   ggplot(aes(x = Time)) +
   geom_bar(color = "grey", fill = "lightgrey") +
@@ -67,13 +46,11 @@ creditcard %>%
 
 
 
-
+#
+# Plot the distribution of fraud and non-fraud amounts
 
 summary(creditcard[creditcard$Class == "0", ]$Amount)
-
 summary(creditcard[creditcard$Class == "1", ]$Amount)
-
-
 
 
 creditcard %>%
@@ -83,7 +60,8 @@ creditcard %>%
   facet_wrap( ~ Class, scales = "free", ncol = 2)
 
 
-
+#
+# train deep learning model
 
 
 library(h2o)
@@ -135,8 +113,9 @@ ggplot(train_features, aes(x = DF.L2.C1, y = DF.L2.C2, color = Class)) +
 
 
 
-
+#
 # let's take the third hidden layer
+
 train_features <- h2o.deepfeatures(model_nn, train_unsupervised, layer = 3) %>%
   as.data.frame() %>%
   mutate(Class = as.factor(as.vector(train_unsupervised[, 31]))) %>%
@@ -202,6 +181,11 @@ anomaly %>%
 
 
 
+#
+# pre-trained supervised model
+# We can now try using the autoencoder model as a pre-training input for a supervised model. 
+# Here, I am again using a neural network. This model will now use the weights from the autoencoder for model fitting.
+
 model_nn_2 <- h2o.deeplearning(y = response,
                                x = features,
                                training_frame = train_supervised,
@@ -219,6 +203,8 @@ model_nn_2 <- h2o.deeplearning(y = response,
 model_nn_2
 
 
+#
+#
 
 pred <- as.data.frame(h2o.predict(object = model_nn_2, newdata = test)) %>%
   mutate(actual = as.vector(test[, 31]))
