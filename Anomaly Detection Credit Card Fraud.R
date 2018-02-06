@@ -1,7 +1,7 @@
  # https://shiring.github.io/machine_learning/2017/05/01/fraud
 
 
-
+hi there
 
 install.packages('h2o')
 
