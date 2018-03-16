@@ -17,6 +17,7 @@ creditcard %>%
   theme_bw()
 
 
+
 #
 # separate transactions by day
 creditcard$day <- ifelse(creditcard$Time > 3600 * 24, "day2", "day1")
