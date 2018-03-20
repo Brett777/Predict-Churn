@@ -10,8 +10,6 @@ creditcard <- read.csv("https://s3-us-west-1.amazonaws.com/dsclouddata/creditcar
 
 
 
-
-
 # Show highly unbalanced dataset
 creditcard %>%
   ggplot(aes(x = Class)) +
