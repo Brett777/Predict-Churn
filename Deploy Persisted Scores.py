@@ -47,7 +47,7 @@ def predict_churn(State,AccountLength,AreaCode,Phone,IntlPlan,VMailPlan,VMailMes
     probabilityChurn = predictionsOut[1][1]
     probabilityRetain = predictionsOut[1][2]
     
-    engine = create_engine("mysql+mysqldb://brett:"+'Admin123!'+"@104.197.234.210/customers")
+    engine = create_engine("mysql+mysqldb://brett:"+'Admin123!'+"@35.192.13.34/customers")
     predictionsToDB = h2o.as_list(predictions, use_pandas=True)
     predictionsToDB.to_sql(con=engine, name='predictions', if_exists='append')
     
