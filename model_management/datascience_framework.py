@@ -213,9 +213,9 @@ class DataScienceFramework(object):
         self.model_serialized = self.serialize_model()
 
         # save model object locally for now
-        mkdir_p(".model_cache")
-        with open(".model_cache/sklearn_model_cache.pkl", "w") as file:
-            dill.dump(self, file)
+        #mkdir_p(".model_cache")
+        #with open(".model_cache/sklearn_model_cache.pkl", "w") as file:
+        #   dill.dump(self, file)
 
         model_meta = self.summary()
 
