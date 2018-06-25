@@ -15,34 +15,46 @@
       "progressUpdateIntervalMs": 500
     },
     {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1529952260058_222156886",
+      "id": "20180625-184420_1471934777",
+      "dateCreated": "Jun 25, 2018 6:44:20 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    },
+    {
       "text": "import pandas as pd",
       "user": "anonymous",
-      "dateUpdated": "Jun 19, 2018 7:33:57 PM",
+      "dateUpdated": "Jun 25, 2018 6:43:26 PM",
       "config": {
         "colWidth": 12.0,
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "python",
+          "language": "text",
           "editOnDblClick": false
         },
-        "editorMode": "ace/mode/python"
+        "editorMode": "ace/mode/text"
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "results": {
-        "code": "SUCCESS",
-        "msg": []
-      },
+      "results": "org.apache.thrift.transport.TTransportException",
       "apps": [],
       "jobName": "paragraph_1529436821419_-82286762",
       "id": "20180619-193341_88535189",
       "dateCreated": "Jun 19, 2018 7:33:41 PM",
-      "dateStarted": "Jun 19, 2018 7:33:57 PM",
-      "dateFinished": "Jun 19, 2018 7:33:59 PM",
-      "status": "FINISHED",
+      "dateStarted": "Jun 25, 2018 6:43:26 PM",
+      "dateFinished": "Jun 25, 2018 6:43:39 PM",
+      "status": "ERROR",
+      "errorMessage": "org.apache.thrift.transport.TTransportException\n\tat org.apache.thrift.transport.TIOStreamTransport.read(TIOStreamTransport.java:132)\n\tat org.apache.thrift.transport.TTransport.readAll(TTransport.java:86)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readAll(TBinaryProtocol.java:429)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readI32(TBinaryProtocol.java:318)\n\tat org.apache.thrift.protocol.TBinaryProtocol.readMessageBegin(TBinaryProtocol.java:219)\n\tat org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:69)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.recv_interpret(RemoteInterpreterService.java:266)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.interpret(RemoteInterpreterService.java:250)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:373)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:97)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:406)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:329)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:473)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:262)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1152)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:622)\n\tat java.lang.Thread.run(Thread.java:748)\n",
       "progressUpdateIntervalMs": 500
     },
     {
@@ -168,8 +180,8 @@
     "2CVRPQ5G3:shared_process": [],
     "2CXG3CXEM:shared_process": [],
     "2CWE4V2WA:shared_process": [],
-    "2CV12SB71:shared_process": [],
-    "2CVYCC6H6:shared_process": []
+    "2CVYCC6H6:shared_process": [],
+    "2CV12SB71:shared_process": []
   },
   "config": {},
   "info": {}
