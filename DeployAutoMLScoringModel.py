@@ -1,6 +1,6 @@
 import os
-from boto.s3.connection import S3Connection
-from boto.s3.key import Key
+#from boto.s3.connection import S3Connection
+#from boto.s3.key import Key
 import h2o
 import numpy as np
 import pandas as pd
