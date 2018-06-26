@@ -205,16 +205,18 @@
       "progressUpdateIntervalMs": 500
     },
     {
+      "text": "%sql\n",
       "user": "anonymous",
+      "dateUpdated": "Jun 26, 2018 12:41:38 PM",
       "config": {},
       "settings": {
         "params": {},
         "forms": {}
       },
       "apps": [],
-      "jobName": "paragraph_1529952654709_-1894997007",
-      "id": "20180625-185054_1039117687",
-      "dateCreated": "Jun 25, 2018 6:50:54 PM",
+      "jobName": "paragraph_1530016898605_1848336656",
+      "id": "20180626-124138_855605272",
+      "dateCreated": "Jun 26, 2018 12:41:38 PM",
       "status": "READY",
       "progressUpdateIntervalMs": 500
     }
