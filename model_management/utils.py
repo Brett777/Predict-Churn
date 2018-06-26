@@ -3,7 +3,7 @@ import json
 import os
 import re
 import ipykernel
-from nbformat import read, write, NO_CONVERT
+from nbformat import read, NO_CONVERT
 
 # version dependent imports
 from six.moves.urllib.parse import urljoin
@@ -19,6 +19,33 @@ except ImportError:  # Python 2
         from IPython.html.notebookapp import list_running_servers
 import six
 import errno
+
+
+def to_list(list_like, flatten=False):
+    """Turn data into python list."""
+    # pass through for list type
+    if type(list_like) == list:
+        return list_like
+    # try as numpy array
+    try:
+        if flatten:
+            return list_like.flatten().tolist()
+        else:
+            return list_like.tolist()
+    except AttributeError:
+        # try as pandas
+        try:
+            if flatten:
+                try:
+                    return list_like.values.flatten().tolist()
+                except AttributeError:
+                    # catch for pandas.Series
+                    return list_like.values.tolist()
+            else:
+                return list_like.values.tolist()
+        except AttributeError:
+            # if still not working, turn it to a list
+            return list(list_like)
 
 
 def mkdir_p(path):

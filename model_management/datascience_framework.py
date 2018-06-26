@@ -2,7 +2,7 @@ import os
 import io
 import sys
 import dill
-import copy
+import six
 from datetime import datetime
 
 from .evaluator import Evaluator
@@ -12,6 +12,7 @@ from .utils import (
     strip_output,
     get_current_notebook,
     mkdir_p,
+    to_list,
 )
 
 
@@ -31,8 +32,8 @@ class DataScienceFramework(object):
         self.description = description
         self.model = model
         self.problem_class = problem_class
-        self.y_test = list(y_test)
-        self.x_test = list(x_test)
+        self.y_test = to_list(y_test, flatten=True)
+        self.x_test = to_list(x_test)
         self.framework = model.__module__.split(".")[0]
 
         # get environment data
@@ -41,6 +42,9 @@ class DataScienceFramework(object):
         self.y_pred = self.predict()
         # initialize evaluator
         self.evaluator = Evaluator(self.problem_class)
+
+        # initialize saving response
+        self.response = None
 
     # class methods
     @classmethod
@@ -210,28 +214,34 @@ class DataScienceFramework(object):
 
     def save(self):
         """ Save all information to platform. """
-        self.model_serialized = self.serialize_model()
+        if self.response:
+            six.print_("Model already saved to platform.")
+        else:
+            self.model_serialized = self.serialize_model()
 
-        # save model object locally for now
-        #mkdir_p(".model_cache")
-        #with open(".model_cache/sklearn_model_cache.pkl", "w") as file:
-        #   dill.dump(self, file)
+            # save model object locally for now
+            mkdir_p(".model_cache")
+            with open(".model_cache/sklearn_model_cache.pkl", "w") as file:
+                dill.dump(self, file)
 
-        model_meta = self.summary()
+            model_meta = self.summary()
 
-        model_meta.update(
-            {
-                "data": {"y_pred": list(self.y_pred), "y_test": list(self.y_test)},
-                "notebook": get_current_notebook(),
-            }
-        )
-
-        query = """
-            mutation($input: CreateModelInput!) {
-                createModel(input: $input) {
-                    clientMutationId
+            model_meta.update(
+                {
+                    "data": {"y_pred": list(self.y_pred), "y_test": list(self.y_test)},
+                    "notebook": get_current_notebook(),
                 }
-            }
-            """
+            )
 
-        return post_to_platform({"query": query, "variables": {"input": model_meta}})
+            query = """
+                mutation($input: CreateModelInput!) {
+                    createModel(input: $input) {
+                        clientMutationId
+                    }
+                }
+                """
+
+            self.response = post_to_platform(
+                {"query": query, "variables": {"input": model_meta}}
+            )
+            six.print_("Model saved to platform.")
